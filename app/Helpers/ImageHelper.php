@@ -12,6 +12,9 @@ class ImageHelper
         $height = null
     ) {
         $destinationPath = public_path($directory);
+        if (!is_dir($destinationPath)) {
+            mkdir($destinationPath, 0777, true);
+        }
         $extension = strtolower($file->getClientOriginalExtension());
         $image = null;
         // Tentukan metode pembuatan gambar berdasarkan ekstensi file

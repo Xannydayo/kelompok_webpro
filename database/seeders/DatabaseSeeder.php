@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
         ]);
         #untuk record berikutnya silahkan, beri nilai berbeda pada nilai: nama, email, hp dengan nilai masing-masing anggota kelompok
         User::create([
-            'nama' => 'Risa Wati',
-            'email' => 'risawati@gmail.com',
+            'nama' => 'yogaviveka',
+            'email' => 'yoga@gmail.com',
             'role' => '0',
             'status' => 1,
             'hp' => '0812345678902',
