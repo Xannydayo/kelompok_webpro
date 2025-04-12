@@ -17,7 +17,7 @@ class ImageHelper
         }
         $extension = strtolower($file->getClientOriginalExtension());
         $image = null;
-        // Tentukan metode pembuatan gambar berdasarkan ekstensi file
+
         switch ($extension) {
             case 'jpeg':
             case 'jpg':

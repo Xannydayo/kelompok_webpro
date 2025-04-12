@@ -38,7 +38,7 @@
 
 </head>
 
-<body>
+<body></body>
     <!-- HEADER -->
     <header>
         <!-- top Header -->
@@ -88,7 +88,7 @@
                                 </div>
                                 <strong class="text-uppercase">Akun Saya<i class="fa fa-caret-down"></i></strong>
                             </div>
-                            <a href="#" class="text-uppercase">Login</a>
+                            <a href="./backend/login" class="text-uppercase">Login</a>
                             <ul class="custom-menu">
                                 <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
                                 <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
