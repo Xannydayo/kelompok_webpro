@@ -6,8 +6,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\LoginPelangganController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,7 @@ Route::get('backend/beranda', [BerandaController::class, 'berandaBackend'])->nam
 Route::get('backend/login', [LoginController::class, 'loginBackend'])->name('backend.login');
 Route::post('backend/login', [LoginController::class, 'authenticateBackend'])->name('backend.login');
 Route::post('backend/logout', [LoginController::class, 'logoutBackend'])->name('backend.logout');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 // Route untuk User
 // Route::resource('backend/user', UserController::class)->middleware('auth');
@@ -49,3 +51,7 @@ Route::post('backend/laporan/cetakproduk', [ProdukController::class, 'cetakProdu
 // Frontend
 Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/login', [LoginPelangganController::class, 'login'])->name('login');
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
