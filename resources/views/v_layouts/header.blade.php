@@ -44,16 +44,33 @@
                             <div class="header-btns-icon">
                                 <i class="fa fa-user-o"></i>
                             </div>
-                            <strong class="text-uppercase">Akun Saya<i class="fa fa-caret-down"></i></strong>
+                            <strong class="text-uppercase">
+                                @auth
+                                    {{ auth()->user()->nama }} <i class="fa fa-caret-down"></i>
+                                @else
+                                    Akun Saya <i class="fa fa-caret-down"></i>
+                                @endauth
+                            </strong>
                         </div>
-                        <a href="#" class="text-uppercase">Login</a>
+                    
                         <ul class="custom-menu">
-                            <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-                            <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-                            <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-unlock-alt"></i> Login</a></li>
-                            <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+                            @auth
+                                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                                <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+                                <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+                                <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logoutpelanggan') }}">
+                                        @csrf
+                                        <button type="submit" style="background:none;border:none;padding:0;margin:0;color:#333;cursor:pointer;">
+                                            <i class="fa fa-sign-out"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            @else
+                                <li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                                <li><a href="/register"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+                            @endauth
                         </ul>
                     </li>
                     <!-- /Account -->
