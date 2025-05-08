@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\optional;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +15,17 @@ class RegisterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function register()
     {
         return view('auth.register');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -26,27 +33,38 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8|confirmed',
-        'hp' => 'required|numeric',
-    ]);
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:225',
+            'email' => 'required|string|email|max:255|unique:user',
+            'password' => 'required|string|min:8',
+            'hp' => 'required|string|max:15',
+        ]);
 
-    $user = new \App\Models\User();
-    $user->nama = $request->input('nama');
-    $user->email = $request->input('email');
-    $user->password = bcrypt($request->input('password'));
-    $user->hp = $request->input('hp');
-    $user->save();
-
-    return redirect()->route('login')->with('success', 'Registration successful. Please login.');
+        $user = User::create([
+            'nama' => $validatedData['nama'],
+            'email' => $validatedData['email'],
+            'role' => '2',
+            'status' => '1',
+            'password' => Hash::make($validatedData['password']),
+            'hp' => $validatedData['hp'],
+        ]);
+        Auth::login($user);
+        return redirect()->route('beranda')->with('success', 'Registration successful. Please login.');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(optional $optional)
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
         //
     }
@@ -54,7 +72,7 @@ class RegisterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, optional $optional)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -62,7 +80,7 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(optional $optional)
+    public function destroy(string $id)
     {
         //
     }

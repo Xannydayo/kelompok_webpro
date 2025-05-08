@@ -6,30 +6,36 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginPelangganController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
+
 
 Route::get('/', function () {
     return redirect()->route('beranda');
 });
+
+//API Google
+// register
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'register');
+    Route::post('/store-register', 'store')->name('store.register');
+});
+// nama pelanggan
+// login pelanggan
+Route::controller(LoginPelangganController::class)->group(function () {
+    Route::get('/login', 'index')->name('login');
+    Route::post('/post-login', 'store')->name('postlogin');
+    Route::post('/logout-pelanggan', 'logout')->name('logoutpelanggan');
+});
+
 
 Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 Route::get('backend/beranda', [BerandaController::class, 'berandaBackend'])->name('backend.beranda')->middleware('auth');
 Route::get('backend/login', [LoginController::class, 'loginBackend'])->name('backend.login');
 Route::post('backend/login', [LoginController::class, 'authenticateBackend'])->name('backend.login');
 Route::post('backend/logout', [LoginController::class, 'logoutBackend'])->name('backend.logout');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 // Route untuk User
 // Route::resource('backend/user', UserController::class)->middleware('auth');
@@ -50,6 +56,5 @@ Route::get('backend/laporan/formproduk', [ProdukController::class, 'formProduk']
 Route::post('backend/laporan/cetakproduk', [ProdukController::class, 'cetakProduk'])->name('backend.laporan.cetakproduk')->middleware('auth');
 // Frontend
 Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
-Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
-Route::get('/login', [LoginPelangganController::class, 'index'])->name('login');
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');
+Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');

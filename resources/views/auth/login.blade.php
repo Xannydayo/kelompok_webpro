@@ -1,96 +1,138 @@
-<!-- Start of Selection -->
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Tokoonline</title>
-    <link rel="stylesheet" href="{{ asset('backend/dist/css/style.min.css') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_univ_bsi.png') }}">
+    <title>Login - Shopee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FF5722; /* Latar belakang oranye */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: white;
+            width: 350px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+        }
+        .login-container input:focus {
+            border-color: #FF5722;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #e64a19;
+        }
+        .login-container .qr-login {
+            text-align: right;
+            font-size: 14px;
+            color: #FF5722;
+        }
+        .login-container .forgot-password {
+            display: block;
+            text-align: left;
+            color: #1e88e5;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .login-container .social-login {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .login-container .social-login a {
+            width: 48%;
+            padding: 12px;
+            font-size: 14px;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .login-container .facebook {
+            background-color: #3b5998;
+            color: white;
+        }
+        .login-container .facebook:hover {
+            background-color: #2d4373;
+        }
+        .login-container .google {
+            background-color: #db4437;
+            color: white;
+        }
+        .login-container .google:hover {
+            background-color: #c1351d;
+        }
+        .login-container .signup {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .login-container .signup a {
+            color: #1e88e5;
+            text-decoration: none;
+        }
+        .login-container .signup a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+<body>
 
-<body class="bg-light">
-    <div class="container">
-        <div class="row justify-content-center align-items-center min-vh-100">
-            <div class="col-md-6">
-                <div class="card shadow-lg">
-                    <div class="card-header text-center bg-primary text-white">
-                        <h4>Login to Tokoonline</h4>
-                    </div>
-                    <div class="card-body">
-                        @if(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>{{ session('error') }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
-                        <form action="{{ route('backend.login') }}" method="post">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Enter your email">
-                                @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter your password">
-                                @error('password')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <button type="submit" class="btn btn-success">Login</button>
-                                <a href="#" id="to-recover" class="text-decoration-none">Forgot password?</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div id="recoverform" class="mt-3" style="display: none;">
-                    <div class="card shadow-lg">
-                        <div class="card-header text-center bg-warning text-white">
-                            <h4>Recover Password</h4>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-center">Enter your email address below and we'll send you instructions to reset your password.</p>
-                            <form action="index.html">
-                                <div class="mb-3">
-                                    <label for="recover-email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="recover-email" placeholder="Enter your email">
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" id="to-login" class="text-decoration-none">Back to Login</a>
-                                    <button type="button" class="btn btn-info">Recover</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="login-container">
+        <h2>Log in</h2>
+        <form action ="{{ route('postlogin') }}" method="POST">
+            @csrf
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">LOG IN</button>
+        </form>
+            <a href="#" class="forgot-password">Lupa Password</a>
+            
+
+        <div class="social-login">
+            <a href="#" class="facebook">Facebook</a>
+            <a href="#" class="google">Google</a>
+        </div>
+
+        <div class="signup">
+            <p>Baru di Shopee? <a href="/register">Daftar</a></p>
         </div>
     </div>
-    <script src="{{ asset('backend/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('backend/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#to-recover').click(function() {
-                $('.card').hide();
-                $('#recoverform').show();
-            });
-            $('#to-login').click(function() {
-                $('#recoverform').hide();
-                $('.card').show();
-            });
-        });
-    </script>
-</body>
 
+</body>
 </html>
-<!-- End of Selection -->

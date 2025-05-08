@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 class LoginPelangganController extends Controller
 {
     /**
@@ -32,12 +34,15 @@ class LoginPelangganController extends Controller
             'password' => 'required',
         ]);
 
+        //attemot to login
         if (Auth::attempt($credentials)) {
+        //Regenerate session
             $request->session()->regenerate();
-            return redirect()->intended('/beranda')->with('success', 'Login Berhasil','Selamat Datang di Toko Online');
+            //Redirect to intended page
+            return redirect()->intended('/beranda')->with('success', 'Login successful. Welcome!');
         }
-
-        return back()->with('error', 'Email atau Password Salah');
+        //Login failed
+        return back()->with('Invalid credentials!')->withInput();
     }
 
     /**
@@ -71,11 +76,13 @@ class LoginPelangganController extends Controller
     {
         //
     }
+
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')->with('success', 'Logout Berhasil');
+        return redirect('/')->with('success', 'Logout successful. See you next time!');
     }
+
 }
