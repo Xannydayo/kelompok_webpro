@@ -9,6 +9,8 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginPelangganController;
+use App\Http\Controllers\OrderController;
+
 
 
 
@@ -58,3 +60,30 @@ Route::post('backend/laporan/cetakproduk', [ProdukController::class, 'cetakProdu
 Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');
 Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
+
+Route::middleware('is.customer')->group(function () {
+
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/customer/akun/{id}', 'akun')->name('customer.akun');
+        Route::put('/customer/updateakun/{id}', 'updateAkun')->name('customer.updateakun');
+    });
+
+    // order
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('add-to-cart/{id}', 'addToCart')->name('order.addToCart');
+        Route::get('cart', 'viewCart')->name('order.cart');
+        Route::post('cart/update/{id}', 'updateCart')->name('order.updateCart');
+        Route::post('remove/{id}', 'removeFromCart')->name('order.remove');
+
+    // ongkir
+        Route::post('select-shipping', 'selectShipping')->name('order.selectShipping');
+        Route::get('provinces', 'getProvinces');
+        Route::get('cities', 'getCities');
+        Route::post('cost', 'getCost');
+        Route::post('updateongkir', 'updateongkir')->name('order.updateongkir');
+    });
+
+    
+
+
+});
