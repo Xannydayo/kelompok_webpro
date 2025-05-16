@@ -49,6 +49,7 @@ Route::post('backend/laporan/cetakuser', [UserController::class, 'cetakUser'])->
 Route::resource('backend/kategori', KategoriController::class, ['as' => 'backend'])->middleware('auth');
 // Route untuk Produk
 Route::resource('backend/produk', ProdukController::class, ['as' => 'backend'])->middleware('auth');
+
 // Route untuk menambahkan foto
 Route::post('foto-produk/store', [ProdukController::class, 'storeFoto'])->name('backend.foto_produk.store')->middleware('auth');
 // Route untuk menghapus foto

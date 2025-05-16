@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('kode_pos', 10);
             $table->timestamps();
+            $table->unsignedBigInteger('user_id')->after('id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

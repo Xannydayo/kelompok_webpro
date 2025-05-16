@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class BerandaController extends Controller
@@ -16,7 +17,7 @@ class BerandaController extends Controller
     }
     public function index()
     {
-        $product = Product::where('status', 1)->orderBy('updated_at', 'desc')->paginate(6);
+        $product = Produk::where('status', 1)->orderBy('updated_at', 'desc')->paginate(6);
         // dd($product);
         return view('v_beranda.index', [
             'judul' => 'Halaman Beranda',

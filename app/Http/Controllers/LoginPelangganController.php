@@ -50,8 +50,8 @@ class LoginPelangganController extends Controller
                     'user_id'      => $user->id,
                     'google_id'    => 1,
                     'google_token' => 1,
-                    'alamat'       => 1,
-                    'pos'          => 1,
+                    'alamat'       => null,
+                    'pos'          => null,
                     'created_at'   => now(),
                     'updated_at'   => now(),
                 ]);
@@ -61,7 +61,7 @@ class LoginPelangganController extends Controller
         }
     
         return back()->with('error', 'Email atau password salah!')->withInput();
-    }
+}
 
     /**
      * Display the specified resource.

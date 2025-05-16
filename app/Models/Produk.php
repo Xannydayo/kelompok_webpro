@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Produk extends Model
 {
     public $timestamps = true;
-    protected $table = "product";
+    protected $table = "produk";
     protected $guarded = ['id'];
 
     public function kategori()
@@ -27,6 +27,6 @@ class Product extends Model
 
     public function gambar()
     {
-        return $this->hasMany(fotoProduk::class, 'product_id', 'id');
+        return $this->hasMany(fotoProduk::class, 'produk_id', 'id');
     }
 }
