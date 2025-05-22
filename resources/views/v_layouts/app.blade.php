@@ -105,9 +105,9 @@
                     <div class="banner banner-1">
                         <img src="{{ asset('frontend/img/banner01.jpg') }}" alt="">
                         <div class="banner-caption text-center">
-                            <h1>Bags sale</h1>
-                            <h3 class="white-color font-weak">Up to 50% Discount</h3>
-                            <button class="primary-btn">Shop Now</button>
+                            <h1>Buah Segar</h1>
+                            <h3 class="white-color font-weak">Diskon 50%</h3>
+                            <button class="primary-btn">Pesan Sekarang</button>
                         </div>
                     </div>
                     <!-- /banner -->
@@ -116,8 +116,8 @@
                     <div class="banner banner-1">
                         <img src="{{ asset('frontend/img/banner02.jpg') }}" alt="">
                         <div class="banner-caption">
-                            <h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-                            <button class="primary-btn">Shop Now</button>
+                            <h1 class="primary-color">Sayur Sehat<br><span class="white-color font-weak">Langsung dari Petani untuk Anda</span></h1>
+                            <button class="primary-btn">Pesan Sekarang</button>
                         </div>
                     </div>
                     <!-- /banner -->
@@ -126,8 +126,8 @@
                     <div class="banner banner-1">
                         <img src="{{ asset('frontend/img/banner03.jpg') }}" alt="">
                         <div class="banner-caption">
-                            <h1 class="white-color">New Product <span>Collection</span></h1>
-                            <button class="primary-btn">Shop Now</button>
+                            <h1 class="white-color">Produk baru <span>Siap Dikirim</span></h1>
+                            <button class="primary-btn">Pesan Sekarang</button>
                         </div>
                     </div>
                     <!-- /banner -->
