@@ -24,10 +24,6 @@
       background: #f2f2f2;
       margin-bottom: 5px;
     }
-    #result .total {
-      font-weight: bold;
-      color: #ff0000;
-    }
   </style>
 </head>
 <body>
@@ -129,17 +125,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (data.rajaongkir.status.code === 200) {
           const results = data.rajaongkir.results[0].costs;
-          let totalCost = 0;
           results.forEach(cost => {
-            totalCost += parseInt(cost.cost[0].value);
+            const div = document.createElement('div');
+            div.textContent = `${cost.service}: ${cost.cost[0].value} Rupiah (${cost.cost[0].etd} hari)`;
+            resultDiv.appendChild(div);
           });
-          const div = document.createElement('div');
-          div.textContent = `${cost.service}: ${cost.cost[0].value} Rupiah (${cost.cost[0].etd} hari)`;
-          resultDiv.appendChild(div);
-          const totalDiv = document.createElement('div');
-          totalDiv.classList.add('total');
-          totalDiv.textContent = `Total Biaya: ${totalCost} Rupiah`;
-          resultDiv.appendChild(totalDiv);
         } else {
           console.error('Gagal mengambil data ongkir:', data.rajaongkir.status.description);
         }
