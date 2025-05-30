@@ -10,6 +10,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginPelangganController;
 use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\RajaOngkirController;
 
 
 
@@ -83,8 +85,17 @@ Route::middleware('is.customer')->group(function () {
         Route::post('cost', 'getCost');
         Route::post('updateongkir', 'updateongkir')->name('order.updateongkir');
     });
+    Route::get('/list-ongkir', function () {
+        $response = Http::withHeaders([
+        'key' => '794a5d197b9cb469ae958ed043ccf921'
+        ])->get('https://api.rajaongkir.com/starter/province'); //ganti 'province' atau 'city'
+        dd($response->json());
+        });
+    });
 
-    
-
-
+    Route::get('/cek-ongkir', function () {
+return view('ongkir');
 });
+Route::get('/provinces', [RajaOngkirController::class, 'getProvinces']);
+Route::get('/cities', [RajaOngkirController::class, 'getCities']);
+Route::post('/cost', [RajaOngkirController::class, 'getCost']);

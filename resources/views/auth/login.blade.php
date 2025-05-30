@@ -1,138 +1,181 @@
 <!DOCTYPE html>
-<html lang="id">
+<html dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Shopee</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #FF5722; /* Latar belakang oranye */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-container {
-            background-color: white;
-            width: 350px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-        .login-container input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            outline: none;
-        }
-        .login-container input:focus {
-            border-color: #FF5722;
-        }
-        .login-container button {
-            width: 100%;
-            padding: 12px;
-            background-color: #FF5722;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #e64a19;
-        }
-        .login-container .qr-login {
-            text-align: right;
-            font-size: 14px;
-            color: #FF5722;
-        }
-        .login-container .forgot-password {
-            display: block;
-            text-align: left;
-            color: #1e88e5;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        .login-container .social-login {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .login-container .social-login a {
-            width: 48%;
-            padding: 12px;
-            font-size: 14px;
-            text-align: center;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-        }
-        .login-container .facebook {
-            background-color: #3b5998;
-            color: white;
-        }
-        .login-container .facebook:hover {
-            background-color: #2d4373;
-        }
-        .login-container .google {
-            background-color: #db4437;
-            color: white;
-        }
-        .login-container .google:hover {
-            background-color: #c1351d;
-        }
-        .login-container .signup {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .login-container .signup a {
-            color: #1e88e5;
-            text-decoration: none;
-        }
-        .login-container .signup a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('image/icon_univ_bsi.png')}}">
+    <title>tokoonline</title>
+    <!-- Custom CSS -->
+    <link href="{{asset('backend/dist/css/style.min.css')}}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
+
 <body>
-
-    <div class="login-container">
-        <h2>Log in</h2>
-        <form action ="{{ route('postlogin') }}" method="POST">
-            @csrf
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">LOG IN</button>
-        </form>
-            <a href="#" class="forgot-password">Lupa Password</a>
-            
-
-        <div class="social-login">
-            <a href="#" class="facebook">Facebook</a>
-            <a href="#" class="google">Google</a>
+    <div class="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
         </div>
-
-        <div class="signup">
-            <p>Baru di Shopee? <a href="/register">Daftar</a></p>
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Login box.scss -->
+        <!-- ============================================================== -->
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
+            <div class="auth-box bg-dark border-top border-secondary">
+                <div id="loginform">
+                    <div class="text-center p-t-20 p-b-20">
+                        <span class="db"><img src="{{asset('backend/images/logo.png')}}" alt="logo" /></span>
+                    </div>
+                    <!-- Form -->
+                    <!-- error -->
+                    @if(session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ session('error')}} </strong>
+                    </div>
+                    @endif
+                    <!-- errorEnd -->
+                    <form class="form-horizontal m-t-20" id="loginform" action="{{route('backend.login') }}"
+                        method="post">
+                        @csrf
+                        <div class="row p-b-30">
+                            <div class="col-12">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-success text-white" id="basic-addon1"><i
+                                                class="ti-user"></i></span>
+                                    </div>
+                                    <input type="text" name="email" value="{{old('email')}}" class="form-control form-control-lg @error('email') is-invalid
+@enderror" placeholder="Masukkan Email" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('email')
+                                    <span class="invalid-feedback alert-danger" role="alert">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-warning text-white" id="basic-addon2"><i
+                                                class="ti-pencil"></i></span>
+                                    </div>
+                                    <<input type="password" name="password"
+                                        class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                        placeholder="Masukkan Password" aria-label="Password"
+                                        aria-describedby="basic-addon1">
+                                        @error('password')
+                                        <span class="invalid-feedback alert-danger" role="alert">
+                                            {{$message}}
+                                        </span>
+                                        @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row border-top border-secondary">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="p-t-20">
+                                        <button class="btn btn-info" id="to-recover" type="button"><i
+                                                class="fa fa-lock m-r-5"></i> Lost password?</button>
+                                        <button class="btn btn-success float-right" type="submit">Login</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="recoverform">
+                    <div class="text-center">
+                        <span class="text-white">Enter your e-mail address below and we will send you instructions how
+                            to recover a password.</span>
+                    </div>
+                    <div class="row m-t-20">
+                        <!-- Form -->
+                        <form class="col-12" action="index.html">
+                            <!-- email -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-danger text-white" id="basic-addon1"><i
+                                            class="ti-email"></i></span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" placeholder="Email Address"
+                                    aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <!-- pwd -->
+                            <div class="row m-t-20 p-t-20 border-top border-secondary">
+                                <div class="col-12">
+                                    <a class="btn btn-success" href="#" id="to-login" name="action">Back To Login</a>
+                                    <button class="btn btn-info float-right" type="button"
+                                        name="action">Recover</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- ============================================================== -->
+        <!-- Login box.scss -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper scss in scafholding.scss -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper scss in scafholding.scss -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right Sidebar -->
+        <!-- ============================================================== -->
     </div>
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="{{ asset('backend/libs/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{{ asset('backend/libs/popper.js/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('backend/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+        $(".preloader").fadeOut();
+        // ============================================================== 
+        // Login and Recover Password 
+        // ============================================================== 
+        $('#to-recover').on("click", function() {
+            $("#loginform").slideUp();
+            $("#recoverform").fadeIn();
+        });
+        $('#to-login').click(function() {
+
+            $("#recoverform").hide();
+            $("#loginform").fadeIn();
+        });
+    </script>
 
 </body>
+
 </html>
