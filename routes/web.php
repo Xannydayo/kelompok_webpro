@@ -80,6 +80,7 @@ Route::middleware('is.customer')->group(function () {
 
     // ongkir
         Route::post('select-shipping', 'selectShipping')->name('order.selectShipping');
+        Route::post('cek-ongkir', 'cekOngkir')->name('cekOngkir');
         Route::get('provinces', 'getProvinces');
         Route::get('cities', 'getCities');
         Route::post('cost', 'getCost');
@@ -93,9 +94,7 @@ Route::middleware('is.customer')->group(function () {
         });
     });
 
-    Route::get('/cek-ongkir', function () {
-return view('ongkir');
-});
+    //Route::get('/cek-ongkir', function () {return view('ongkir');});
 Route::get('/provinces', [RajaOngkirController::class, 'getProvinces']);
 Route::get('/cities', [RajaOngkirController::class, 'getCities']);
 Route::post('/cost', [RajaOngkirController::class, 'getCost']);

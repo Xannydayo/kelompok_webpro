@@ -64,19 +64,14 @@ $item->produk->foto) }}" alt=""></td>
 <li><span>Stok: {{ $item->produk->stok }} Gram</span></li>
 </ul>
 </td>
-<td class="price text-center"><strong>Rp. {{ number_format($item-
-
->harga, 0, ',', '.') }}</strong></td>
+<td class="price text-center"><strong>Rp. {{ number_format($item->harga, 0, ',', '.') }}</strong></td>
 
 <td class="qty text-center">
 <form action="#" method="post">
 @csrf
-<input type="number" name="quantity" value="{{ $item->quantity
+<input type="number" name="quantity" value="{{ $item->quantity}}" min="1" style="width: 60px;">
 
-}}" min="1" style="width: 60px;">
-
-<button type="submit" class="btn btn-sm btn-
-warning">Update</button>
+<button type="submit" class="btn btn-sm btn-warning">Update</button>
 
 </form>
 </td>
@@ -97,7 +92,7 @@ close"></i></button>
 @endforeach
 </tbody>
 </table>
-<form action="#" method="post">
+<form action="{{ route('order.selectShipping')}}" method="post">
 @csrf
 <input type="hidden" name="total_price" value="{{ $totalHarga }}">
 <input type="hidden" name="total_weight" value="{{ $totalBerat }}">
